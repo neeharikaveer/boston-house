@@ -12,8 +12,8 @@
         }
         .output {
             display: inline-block;
-            background-color: #fff3cd;  /* Light Yellow background */
-            color: #856404;            /* Dark amber text */
+            background-color: #fff3cd;
+            color: #856404;
             padding: 15px 25px;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
@@ -83,7 +83,6 @@
 </head>
 <body>
 
-    <!-- ✅ OUTPUT FIRST: At the TOP of the page -->
     {% if prediction_text %}
         <div class="output">{{ prediction_text }}</div>
     {% endif %}
@@ -92,7 +91,13 @@
 
     <form id="predictionForm" action="/predict" method="post">
         {% for column in ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT'] %}
-            <input type="text" name="{{ column }}" placeholder="{{ column }}" required><br>
+            <input 
+                type="text" 
+                name="{{ column }}" 
+                placeholder="{{ column }}" 
+                value="{{ input_data[column] if input_data else '' }}"
+                required
+            ><br>
         {% endfor %}
         <div class="button-container">
             <button type="submit">Predict Price</button>
